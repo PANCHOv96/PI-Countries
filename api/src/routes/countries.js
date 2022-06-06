@@ -6,6 +6,7 @@ const router = Router();
 /// Tengo q revisar el capital 
 router.get('/', (req,res ,next) =>{
     const {name} = req.query;
+    const {orders,pagination} = req.body;
     const conditions = {};
     if(name){
         conditions.where = {
@@ -14,6 +15,9 @@ router.get('/', (req,res ,next) =>{
             }
         };
     }
+    conditions.order = orders;
+    conditions.offset = (pagination && pagination!= 1) ? ((pagination*10)-10) : 1;
+    conditions.limit = (pagination && pagination!= 1) ? 10 : 9;
     let countries = Country.findAll(conditions);
     if(name){
         countries.then(response =>{
@@ -50,7 +54,6 @@ router.get('/', (req,res ,next) =>{
     }
 });
 
-// Revisar
 router.get('/:idPais', (req,res ,next) =>{
     const {idPais} = req.params;
     const conditions = {};

@@ -1,27 +1,35 @@
-const { Router } = require('express');
-const { Activity } = require('../db');
+const { Router, response } = require('express');
+const { Activity ,Op} = require('../db');
 
 
 const router = Router();
-//// Utilizar findOrCreate parala la creacion de la actividad
 router.post('/', (req,res ,next) => {
     const {name,difficulty,duration,season,idPais} = req.body;
     if(!name || !difficulty || !idPais){
         res.json('Faltan datos primordiales');
     }
-    Activity.create({
+    const conditions = {};
+    conditions.where = {
+        [Op.and]: [
+            { name },
+            { difficulty }
+        ]
+    }
+    conditions.defaults = {
         name: name,
         difficulty: difficulty,
         duration: duration,
         season: season
-    }).then(response => {
+    };
+    Activity.findOrCreate(conditions)
+    .then(response => {
         if(Array.isArray(idPais)){
             arregloPais = idPais.map(country => {
-                return response.setCountries(country);
+                return response[0].addCountries(country);
             });
             return Promise.all(arregloPais);
         }else{
-            return response.setCountries(idPais);
+            return response[0].addCountries(idPais);
         }
     })
     .then(response => res.json(response)).catch(e => {next(e)});
