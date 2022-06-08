@@ -3,25 +3,61 @@ const { Country, Activity , Op} = require('../db');
 const axios = require('axios');
 
 const router = Router();
+
+function getConditions(data,objectConditions){
+    const {name , continents , activities , alphabetically , population ,idPais} = data;
+    const arrayWhere = [];
+    const orders = [];
+    if(idPais){
+        objectConditions.where = {
+            id: idPais,
+        };
+        objectConditions.include = {
+            model: Activity
+        };
+        return 
+    }
+    if(name){
+        arrayWhere.push({name: {[Op.iLike]: `%${name}%`}});
+    }
+    if(continents){
+        arrayWhere.push({continent: continents});
+    }
+    objectConditions.where = {
+        [Op.and]: arrayWhere
+    };
+    /////
+    if(activities){
+        objectConditions.include = {
+            model: Activity,
+            where: { name: activities }
+        };
+    }
+    /////
+    if(alphabetically){
+        orders.push(["name",alphabetically]);
+    }
+    if(population){
+        orders.push(["population",population]);
+    }
+    if(orders.length > 0){
+        objectConditions.order = orders;
+    }
+    console.log('objetoCondicion',objectConditions);
+}
 /// Tengo q revisar el capital 
 router.get('/', (req,res ,next) =>{
     const {name} = req.query;
-    const {orders,pagination} = req.body;
+    const {pagination} = req.query;
     const conditions = {};
-    if(name){
-        conditions.where = {
-            name: {
-                [Op.iLike]: `%${name}%`, 
-            }
-        };
-    }
-    conditions.order = orders;
-    conditions.offset = (pagination && pagination!= 1) ? ((pagination*10)-10) : 1;
-    conditions.limit = (pagination && pagination!= 1) ? 10 : 9;
-    let countries = Country.findAll(conditions);
+    getConditions(req.query,conditions);
+    //console.log("Condiciones",conditions)
+    conditions.offset = (pagination && parseInt(pagination)!= 1) ? ((parseInt(pagination)*10)-11) : 0;
+    conditions.limit = (pagination && parseInt(pagination)!= 1) ? 10 : 9;
+    let countries = Country.findAndCountAll(conditions);
     if(name){
         countries.then(response =>{
-            if(!response[0]){
+            if(!response.rows[0]){
                 res.send(`No existe ningun pais con el nombre ${name}`);
             }else{
                 res.json(response);
@@ -29,16 +65,16 @@ router.get('/', (req,res ,next) =>{
         }).catch(e => { next (e)});
     }else{
         countries.then(response => {
-            if(!response[0]){
+            if(!response.rows[0]){
                 axios.get('https://restcountries.com/v3/all')
                 .then(response => response.data)
                 .then(response => response.map(country => {
                         return {
                             id: country.cca3,
-                            name: country.name.official,
+                            name: country.name.common,
                             image: country.flags[0],
-                            continent: country.continents[0],
-                            capital: country.continents[0], //////////CAPITAL
+                            continent: country.region,
+                            capital: country.capital ? country.capital[0] : 'NoTiene', //////////CAPITAL
                             sub_region: country.subregion,
                             area: country.area,
                             population: country.population,
@@ -46,7 +82,10 @@ router.get('/', (req,res ,next) =>{
                     })
                 )
                 .then(response => Country.bulkCreate(response))
-                .then(response => res.json(response));
+                .then(response => res.json({
+                    count: response.length,
+                    rows: response.slice(0,9),
+                }));
             }else{
                 res.json(response);
             }
@@ -57,17 +96,8 @@ router.get('/', (req,res ,next) =>{
 router.get('/:idPais', (req,res ,next) =>{
     const {idPais} = req.params;
     const conditions = {};
-    if(idPais){
-        conditions.where = {
-            id: idPais,
-        };
-        conditions.include = [
-            {
-                model: Activity,
-                exclude: ['country_activity']
-            }
-        ];
-    }
+    getConditions(req.params,conditions)
+    console.log('GET-ID',conditions)
     let countries = Country.findOne(conditions);
     if(idPais){
         countries.then(response =>{

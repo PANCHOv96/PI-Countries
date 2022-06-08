@@ -35,5 +35,13 @@ router.post('/', (req,res ,next) => {
     .then(response => res.json(response)).catch(e => {next(e)});
 });
 
+router.get('/', (req,res,next)=>{
+    Activity.findAll()
+    .then(response =>{
+        res.json(response);
+    })
+    .catch(e => {next(e)});
+});
+
 
 module.exports = router;
