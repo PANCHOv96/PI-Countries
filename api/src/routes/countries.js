@@ -5,9 +5,13 @@ const axios = require('axios');
 const router = Router();
 
 function getConditions(data,objectConditions){
-    const {name , continents , activities , alphabetically , population ,idPais} = data;
+    const {name , continents , activities , alphabetically , population ,idPais ,pagination ,country} = data;
     const arrayWhere = [];
     const orders = [];
+    if(country){
+        objectConditions.attributes = ['name','id'];
+        return
+    }
     if(idPais){
         objectConditions.where = {
             id: idPais,
@@ -43,17 +47,14 @@ function getConditions(data,objectConditions){
     if(orders.length > 0){
         objectConditions.order = orders;
     }
-    console.log('objetoCondicion',objectConditions);
+    objectConditions.offset = (pagination && parseInt(pagination)!= 1) ? ((parseInt(pagination)*10)-11) : 0;
+    objectConditions.limit = (pagination && parseInt(pagination)!= 1) ? 10 : 9;
 }
 /// Tengo q revisar el capital 
 router.get('/', (req,res ,next) =>{
     const {name} = req.query;
-    const {pagination} = req.query;
     const conditions = {};
     getConditions(req.query,conditions);
-    //console.log("Condiciones",conditions)
-    conditions.offset = (pagination && parseInt(pagination)!= 1) ? ((parseInt(pagination)*10)-11) : 0;
-    conditions.limit = (pagination && parseInt(pagination)!= 1) ? 10 : 9;
     let countries = Country.findAndCountAll(conditions);
     if(name){
         countries.then(response =>{

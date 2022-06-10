@@ -1,4 +1,4 @@
-const { Router, response } = require('express');
+const { Router } = require('express');
 const { Activity ,Op} = require('../db');
 
 
@@ -36,7 +36,10 @@ router.post('/', (req,res ,next) => {
 });
 
 router.get('/', (req,res,next)=>{
-    Activity.findAll()
+    Activity.findAll({
+        attributes: ["name"],
+        group: "name",
+    })
     .then(response =>{
         res.json(response);
     })

@@ -11,16 +11,24 @@ export const SET_ALPHABETICALLY = 'SET_ALPHABETICALLY';
 export const SET_RESET = 'SET_RESET';
 export const SET_ACTIVITY = 'SET_ACTIVITY';
 export const CREATE_ACTIVITY = 'CREATE_ACTIVITY';
+export const SET_CARGANDO = 'SET_CARGANDO';
 const axios = require('axios');
 
 export function getCountryAll(conditions){
     return function(dispatch){
+        dispatch(cargando())
         return axios.get(ApiKey,{params:conditions})
             .then(datos => dispatch({                  
                     type: GET_COUNTRY,
                     payload: datos.data
                 })
             )
+    }
+}
+
+export function cargando(){
+    return {
+        type: SET_CARGANDO,
     }
 }
 

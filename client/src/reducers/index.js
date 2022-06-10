@@ -1,8 +1,9 @@
-import {GET_COUNTRY ,GET_COUNTRY_ID,GET_ACTIVITY, SET_NUMBER_PAGE ,SET_NAME ,SET_CONTINENT,SET_POPULATION,SET_ALPHABETICALLY,SET_RESET,SET_ACTIVITY} from '../actions/index.js'
+import {GET_COUNTRY ,GET_COUNTRY_ID,GET_ACTIVITY, SET_NUMBER_PAGE ,SET_NAME ,SET_CONTINENT,SET_POPULATION,SET_ALPHABETICALLY,SET_RESET,SET_ACTIVITY,SET_CARGANDO} from '../actions/index.js'
 
 const initialState={
     country:[],
     activity:[],
+    countryID:{},
     pageMax: 0,
     pageActuality: 1,
     cargando: false,
@@ -16,12 +17,18 @@ export default function rootReducer(state=initialState,action){
             return{
                 ...state,
                 country: action.payload.rows,
-                pageMax: Math.ceil(action.payload.count / 10)
+                pageMax: Math.ceil(action.payload.count / 10),
+                cargando: false
+            }
+        case SET_CARGANDO:
+            return{
+                ...state,
+                cargando: true
             }
         case GET_COUNTRY_ID:
             return{
                 ...state,
-                country: action.payload,
+                countryID: action.payload,
             }
         case GET_ACTIVITY:
             return{

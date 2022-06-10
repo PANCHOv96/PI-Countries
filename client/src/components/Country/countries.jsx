@@ -1,6 +1,6 @@
 import React,{useEffect} from "react";
 import { useDispatch,useSelector } from  'react-redux';
-import { getActivity, getCountryAll } from "../../actions/index.js";
+import { getCountryAll } from "../../actions/index.js";
 import Country from './country.jsx'
 import BtnActivity from '../Activity/BtnActivity.jsx';
 import Searchbar from '../Search/Searchbar.jsx';
@@ -11,15 +11,17 @@ export default function Countries(){
     const dispatch = useDispatch();
     const countries = useSelector((state) => state.country);
     const conditions = useSelector((state) => state.conditions);
+    const cargando = useSelector((state) => state.cargando);
     useEffect(()=>{
         dispatch(getCountryAll(conditions));
-    },[conditions]);
+    },[dispatch,conditions]);
     return(
         <div>
             <BtnActivity />
             <Searchbar />
-            {/* <Filters /> */}
+            <Filters />
             <h2>Countries</h2>
+            {cargando ? 'Cargando...' : ''}
             {countries && countries.map(country =>
                 <Country country={country} key={country.id}/>
             )}

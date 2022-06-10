@@ -7,7 +7,7 @@ export default function Filters(){
     const activity = useSelector((state) => state.activity);
     useEffect(()=>{
         dispatch(getActivity());
-    },[]);
+    },[dispatch]);
     function ContinentSelected(e){
         dispatch(setContinent(e));
     }

@@ -30,7 +30,7 @@ module.exports = (sequilize) => {
         },
         // Temporada -> Verano Otonio Invierno Primavera
         season:{
-            type: DataTypes.ENUM('Summer','Fall','Winter','Spring'),
+            type: DataTypes.ENUM('Summer','Autumn','Winter','Spring'),
             defaultValue: 'Summer'
         }
     },{
