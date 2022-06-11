@@ -59,7 +59,7 @@ router.get('/', (req,res ,next) =>{
     if(name){
         countries.then(response =>{
             if(!response.rows[0]){
-                res.send(`No existe ningun pais con el nombre ${name}`);
+                res.status(404).json({message:`No existe ningun pais con el nombre ${name}`});
             }else{
                 res.json(response);
             }
@@ -103,7 +103,7 @@ router.get('/:idPais', (req,res ,next) =>{
     if(idPais){
         countries.then(response =>{
             if(!response){
-                res.send(`No existe ningun pais con el id ${idPais}`);
+                res.status(404).json({message:`No existe ningun pais con el id ${idPais}`});
             }else{
                 res.json(response);
             }

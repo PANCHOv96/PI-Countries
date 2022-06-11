@@ -12,6 +12,8 @@ export const SET_RESET = 'SET_RESET';
 export const SET_ACTIVITY = 'SET_ACTIVITY';
 export const CREATE_ACTIVITY = 'CREATE_ACTIVITY';
 export const SET_CARGANDO = 'SET_CARGANDO';
+export const ERROR = 'ERROR';
+export const SET_ERROR = 'SET_ERROR';
 const axios = require('axios');
 
 export function getCountryAll(conditions){
@@ -23,6 +25,10 @@ export function getCountryAll(conditions){
                     payload: datos.data
                 })
             )
+            .catch(e => dispatch({                  
+                type: ERROR,
+                msjError: e.response.data
+            }))
     }
 }
 
@@ -40,6 +46,10 @@ export function getCountryID(id){
                     payload: datos.data
                 })
             )
+            .catch(e => dispatch({                  
+                type: ERROR,
+                msjError: e.response.data
+            }))
     }
 }
 
@@ -51,6 +61,10 @@ export function getActivity(){
                     payload: datos.data
                 })
             )
+            .catch(e => dispatch({                  
+                type: ERROR,
+                msjError: e.response.data
+            }))
     }
 }
 
@@ -64,7 +78,7 @@ export function setNumberPage(num){
 export function setName(name){
     return {
         type: SET_NAME,
-        name: (name !== '') ? name : '',
+        name: name,
     }
 }
 
@@ -109,7 +123,19 @@ export function createActivity(data){
                     type: CREATE_ACTIVITY,
                 })
             )
+            .catch(e => dispatch({                  
+                type: ERROR,
+                msjError: e.response.data
+            }))
     }
 }
+
+export function setError(msjError=''){
+    return {
+        type: SET_ERROR,
+        msjError
+    }
+}
+
 
 

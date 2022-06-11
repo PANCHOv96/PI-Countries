@@ -6,7 +6,7 @@ const router = Router();
 router.post('/', (req,res ,next) => {
     const {name,difficulty,duration,season,idPais} = req.body;
     if(!name || !difficulty || !idPais){
-        res.json('Faltan datos primordiales');
+        res.status(400).json({message:'Faltan datos primordiales'});
     }
     const conditions = {};
     conditions.where = {
@@ -23,6 +23,9 @@ router.post('/', (req,res ,next) => {
     };
     Activity.findOrCreate(conditions)
     .then(response => {
+        if(response[1] === false){
+            res.status(404).json({message:'Actividad ya existente'});
+        }
         if(Array.isArray(idPais)){
             arregloPais = idPais.map(country => {
                 return response[0].addCountries(country);
