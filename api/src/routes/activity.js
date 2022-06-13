@@ -1,7 +1,6 @@
 const { Router } = require('express');
 const { Activity ,Op} = require('../db');
 
-
 const router = Router();
 router.post('/', (req,res ,next) => {
     const {name,difficulty,duration,season,idPais} = req.body;

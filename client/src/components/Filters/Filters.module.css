@@ -1,0 +1,32 @@
+.filters{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #EEEEEE;
+    background-color: rgba(57, 62, 70,.9);
+    padding: 15px 0;
+    font-weight: 100;
+}
+.filters>div{
+    margin: 0 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.filters select{
+    height: 30px;
+    margin: 0 10px;
+    border: none;
+    border-radius: 20px 20px;
+}
+.reset{
+    background-color: rgb(238, 238, 238);
+    border:none;
+    height: 30px;
+    width: 30px;
+    border-radius: 20px;
+}
+.reset:hover{
+    cursor: pointer;
+}

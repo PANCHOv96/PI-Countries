@@ -11,14 +11,14 @@ export const SET_ALPHABETICALLY = 'SET_ALPHABETICALLY';
 export const SET_RESET = 'SET_RESET';
 export const SET_ACTIVITY = 'SET_ACTIVITY';
 export const CREATE_ACTIVITY = 'CREATE_ACTIVITY';
-export const SET_CARGANDO = 'SET_CARGANDO';
-export const ERROR = 'ERROR';
-export const SET_ERROR = 'SET_ERROR';
+export const SET_LOADING = 'SET_LOADING';
+export const ALERT = 'ALERT';
+export const SET_ALERT = 'SET_ALERT';
 const axios = require('axios');
 
 export function getCountryAll(conditions){
     return function(dispatch){
-        dispatch(cargando())
+        dispatch(loading())
         return axios.get(ApiKey,{params:conditions})
             .then(datos => dispatch({                  
                     type: GET_COUNTRY,
@@ -26,15 +26,9 @@ export function getCountryAll(conditions){
                 })
             )
             .catch(e => dispatch({                  
-                type: ERROR,
-                msjError: e.response.data
+                type: ALERT,
+                msjAlert: e.response.data
             }))
-    }
-}
-
-export function cargando(){
-    return {
-        type: SET_CARGANDO,
     }
 }
 
@@ -47,8 +41,8 @@ export function getCountryID(id){
                 })
             )
             .catch(e => dispatch({                  
-                type: ERROR,
-                msjError: e.response.data
+                type: ALERT,
+                msjAlert: e.response.data
             }))
     }
 }
@@ -62,8 +56,8 @@ export function getActivity(){
                 })
             )
             .catch(e => dispatch({                  
-                type: ERROR,
-                msjError: e.response.data
+                type: ALERT,
+                msjAlert: e.response.data
             }))
     }
 }
@@ -124,16 +118,22 @@ export function createActivity(data){
                 })
             )
             .catch(e => dispatch({                  
-                type: ERROR,
-                msjError: e.response.data
+                type: ALERT,
+                msjAlert: e.response.data
             }))
     }
 }
 
-export function setError(msjError=''){
+export function loading(){
     return {
-        type: SET_ERROR,
-        msjError
+        type: SET_LOADING,
+    }
+}
+
+export function setAlert(msjAlert=''){
+    return {
+        type: SET_ALERT,
+        msjAlert
     }
 }
 

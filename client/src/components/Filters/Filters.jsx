@@ -1,6 +1,8 @@
 import React, { useEffect }  from "react";
 import { useDispatch , useSelector} from  'react-redux';
-import { setContinent , setAlphabeticallyOrder ,setResetFilter, setPopulationOrder,setActivity, getActivity, setError} from "../../actions/index.js";
+import { setContinent , setAlphabeticallyOrder ,setResetFilter, setPopulationOrder,setActivity, getActivity, setAlert} from "../../actions/index.js";
+import style from './Filters.module.css';
+import resetFilterSvg from './img/reset-filter.svg';
 
 export default function Filters(){
     const dispatch = useDispatch();
@@ -14,15 +16,13 @@ export default function Filters(){
     }
     function ordersSelected(e){
         const order = e.split('-');
-        console.log(order[0])
         if(order[0] ===  'ALFA'){
             dispatch(setAlphabeticallyOrder(order[1]));
         }else{
             if(order[0] ===  'POP'){
                 dispatch(setPopulationOrder(order[1]));
             }else{
-                console.log('Error Orders')
-                dispatch(setError('Error Filters Orders'));
+                dispatch(setAlert('Error Filters Orders'));
             }
         }
     }
@@ -31,7 +31,7 @@ export default function Filters(){
     }
     function printActivitySelect(){
         return (<div>
-                    <label htmlFor="activities">Activities:</label>
+                    <label htmlFor="activities">Activities</label>
                     <select id="activities" name="activities" onChange={e => ActivitySelected(e.target.value)}  value={conditions.activities ? conditions.activities : ''}>
                         <option value='' disabled selected>Filter by Activities</option>
                         {activity.map(act=>{
@@ -41,10 +41,9 @@ export default function Filters(){
                 </div>);
     }
     return(
-        <div>
-            <h2>Filters</h2>
+        <div className={style.filters}>
             <div>
-                <label htmlFor="continents">Continents:</label>
+                <label htmlFor="continents">Continents</label>
                 <select id="continents" name="continents" onChange={e => ContinentSelected(e.target.value)} value={conditions.continents ? conditions.continents : ''}>
                     <option value='' disabled selected>Filter by Continent</option>
                     <option value='Americas'>Americas</option>
@@ -57,7 +56,7 @@ export default function Filters(){
             </div>
             {activity.length > 0 && printActivitySelect()} 
             <div>
-                <label htmlFor="orders">Orders:</label>
+                <label htmlFor="orders">Orders</label>
                 <select id="orders" name="orders" onChange={e => ordersSelected(e.target.value)} value={conditions.alphabetically ? `ALFA-${conditions.alphabetically}` : conditions.population ? `POP-${conditions.population}`:''}>
                     <option value='' disabled selected>Filter by Orders</option>
                     <option value='ALFA-ASC'>ALFA ASC</option>
@@ -66,7 +65,9 @@ export default function Filters(){
                     <option value='POP-DESC'>POP DESC</option>
                 </select>
             </div>
-            <button onClick={()=>{dispatch(setResetFilter())}}>Reset Filters</button>
+            <div>
+                <button onClick={()=>{dispatch(setResetFilter())}} className={style.reset}><img src={resetFilterSvg} alt="" /></button>
+            </div>
         </div>
     );
 }

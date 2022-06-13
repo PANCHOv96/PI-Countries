@@ -9,8 +9,6 @@ import Pages from '../Pages/Pages.jsx';
 export default function Home(){
     return(
         <div>
-            <BtnActivity />
-            <Searchbar />
             <Filters />
             <Countries />
             <Pages />

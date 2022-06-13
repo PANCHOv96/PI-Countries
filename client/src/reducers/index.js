@@ -1,4 +1,4 @@
-import {GET_COUNTRY ,GET_COUNTRY_ID,GET_ACTIVITY, SET_NUMBER_PAGE ,SET_NAME ,SET_CONTINENT,SET_POPULATION,SET_ALPHABETICALLY,SET_RESET,SET_ACTIVITY,SET_CARGANDO,ERROR,SET_ERROR} from '../actions/index.js'
+import {GET_COUNTRY ,GET_COUNTRY_ID,GET_ACTIVITY, SET_NUMBER_PAGE ,SET_NAME ,SET_CONTINENT,SET_POPULATION,SET_ALPHABETICALLY,SET_RESET,SET_ACTIVITY,SET_LOADING, ALERT,SET_ALERT} from '../actions/index.js'
 
 const initialState={
     country:[],
@@ -6,10 +6,10 @@ const initialState={
     countryID:{},
     pageMax: 0,
     pageActuality: 1,
-    cargando: false,
+    loading: false,
     conditions:{
     },
-    error:''
+    alert:''
 }
 
 export default function rootReducer(state=initialState,action){
@@ -19,26 +19,20 @@ export default function rootReducer(state=initialState,action){
                 ...state,
                 country: action.payload.rows,
                 pageMax: Math.ceil(action.payload.count / 10),
-                cargando: false,
-                error:''
-            }
-        case SET_CARGANDO:
-            return{
-                ...state,
-                cargando: true,
-                error:''
+                loading: false,
+                alert:''
             }
         case GET_COUNTRY_ID:
             return{
                 ...state,
                 countryID: action.payload,
-                error:''
+                alert:''
             }
         case GET_ACTIVITY:
             return{
                 ...state,
                 activity: action.payload,
-                error:''
+                alert:''
             }
         case SET_NUMBER_PAGE: 
             return{
@@ -48,7 +42,7 @@ export default function rootReducer(state=initialState,action){
                     ...state.conditions,
                     pagination: action.pageActuality
                 },
-                error:''
+                alert:''
             }
         case SET_NAME: 
             return{
@@ -59,7 +53,7 @@ export default function rootReducer(state=initialState,action){
                     name: (action.name !== '') ? action.name : '',
                     pagination: 1
                 },
-                error:''
+                alert:''
             }
         case SET_CONTINENT: 
             return{
@@ -70,7 +64,7 @@ export default function rootReducer(state=initialState,action){
                     continents: action.continents,
                     pagination: 1
                 },
-                error:''
+                alert:''
             }
         case SET_POPULATION: 
             return{
@@ -82,7 +76,7 @@ export default function rootReducer(state=initialState,action){
                     alphabetically: '',
                     pagination: 1
                 },
-                error:''
+                alert:''
             }
         case SET_ALPHABETICALLY: 
             return{
@@ -94,7 +88,7 @@ export default function rootReducer(state=initialState,action){
                     population: '',
                     pagination: 1
             },
-            error:''
+            alert:''
         }
         case SET_ACTIVITY: 
             return{
@@ -105,26 +99,32 @@ export default function rootReducer(state=initialState,action){
                     activities: action.activities,
                     pagination: 1
             },
-            error:''
+            alert:''
         }
         case SET_RESET: 
             return{
                 ...state,
                 pageActuality: 1,
                 conditions:{},
-                error:''
+                alert:''
             }
-        case ERROR: 
+        case SET_LOADING:
             return{
                 ...state,
-                cargando:false,
-                error: action.msjError
+                loading: true,
+                alert:''
             }
-        case SET_ERROR: 
+        case ALERT: 
             return{
                 ...state,
-                cargando:false,
-                error: {message:action.msjError}
+                loading:false,
+                alert: action.msjAlert
+            }
+        case SET_ALERT: 
+            return{
+                ...state,
+                loading:false,
+                alert: {message:action.msjAlert}
             }
         default:
             return {...state}

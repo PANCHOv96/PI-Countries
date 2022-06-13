@@ -1,56 +1,9 @@
 const { Router } = require('express');
-const { Country, Activity , Op} = require('../db');
+const { Country } = require('../db');
 const axios = require('axios');
-
+const getConditions = require('./Conditions/Conditions.js');
 const router = Router();
 
-function getConditions(data,objectConditions){
-    const {name , continents , activities , alphabetically , population ,idPais ,pagination ,country} = data;
-    const arrayWhere = [];
-    const orders = [];
-    if(country){
-        objectConditions.attributes = ['name','id'];
-        return
-    }
-    if(idPais){
-        objectConditions.where = {
-            id: idPais,
-        };
-        objectConditions.include = {
-            model: Activity
-        };
-        return 
-    }
-    if(name){
-        arrayWhere.push({name: {[Op.iLike]: `%${name}%`}});
-    }
-    if(continents){
-        arrayWhere.push({continent: continents});
-    }
-    objectConditions.where = {
-        [Op.and]: arrayWhere
-    };
-    /////
-    if(activities){
-        objectConditions.include = {
-            model: Activity,
-            where: { name: activities }
-        };
-    }
-    /////
-    if(alphabetically){
-        orders.push(["name",alphabetically]);
-    }
-    if(population){
-        orders.push(["population",population]);
-    }
-    if(orders.length > 0){
-        objectConditions.order = orders;
-    }
-    objectConditions.offset = (pagination && parseInt(pagination)!= 1) ? ((parseInt(pagination)*10)-11) : 0;
-    objectConditions.limit = (pagination && parseInt(pagination)!= 1) ? 10 : 9;
-}
-/// Tengo q revisar el capital 
 router.get('/', (req,res ,next) =>{
     const {name} = req.query;
     const conditions = {};
@@ -59,7 +12,7 @@ router.get('/', (req,res ,next) =>{
     if(name){
         countries.then(response =>{
             if(!response.rows[0]){
-                res.status(404).json({message:`No existe ningun pais con el nombre ${name}`});
+                res.status(404).json({message:`There is no country named: ${name}`});
             }else{
                 res.json(response);
             }
@@ -75,7 +28,7 @@ router.get('/', (req,res ,next) =>{
                             name: country.name.common,
                             image: country.flags[0],
                             continent: country.region,
-                            capital: country.capital ? country.capital[0] : 'NoTiene', //////////CAPITAL
+                            capital: country.capital ? country.capital[0] : 'Dont Have', 
                             sub_region: country.subregion,
                             area: country.area,
                             population: country.population,
@@ -103,7 +56,7 @@ router.get('/:idPais', (req,res ,next) =>{
     if(idPais){
         countries.then(response =>{
             if(!response){
-                res.status(404).json({message:`No existe ningun pais con el id ${idPais}`});
+                res.status(404).json({message:`There is no country with the id: ${idPais}`});
             }else{
                 res.json(response);
             }

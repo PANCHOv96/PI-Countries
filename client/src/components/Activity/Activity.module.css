@@ -1,0 +1,66 @@
+fieldset{
+    width: 900px;
+    margin: 50px auto;
+    border-radius: 4px;
+    text-align: left;
+}
+fieldset legend{
+    font-size: 24px;
+}
+fieldset label {
+    display: block;
+    text-transform: uppercase;
+
+}
+fieldset input,fieldset select{
+    display: block;
+    width: 100%;
+    background-color: #e1e1e1;
+    padding: 1rem;
+    margin-bottom: 20px;
+    border: none;
+    border-radius: 0.5rem;
+}
+fieldset label span{
+    font-size: 10px;
+    color: red;
+}
+.alert{
+    border: 1px solid red;
+}
+.createActivity{
+    border: none;
+    border-radius: 50px;
+    height: 40px;
+    background-color: rgb(255, 211, 105);
+    color: rgb(57, 62, 70);
+    transition: all 2s;
+}
+.createActivity:disabled{
+    background-color: rgb(255, 211, 105,.3);
+}
+.createActivity:hover{
+    cursor: pointer;
+}
+.right{
+    text-align: right;
+}
+.containerAddedCountries{
+    display: flex;
+    flex-wrap: wrap;
+    justify-items: center;
+    align-items: center;
+}
+.delete{
+    background-color: transparent;
+    border: 1px solid rgb(57, 62, 70);
+    border-radius: 3px;
+    margin: 4px;
+}
+.delete:hover{
+    transition: all 1.3s;
+    cursor: pointer;
+    border: none;
+    background-color: red;
+    color: white;
+}

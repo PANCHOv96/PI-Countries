@@ -1,6 +1,8 @@
 import React , {useState} from "react";
 import { useDispatch} from  'react-redux';
 import { setName } from "../../actions/index.js";
+import style from './Searchbar.module.css';
+import magnifyingGlass from './img/magnifying-glass.svg';
 
 export default function Searchbar(){
     const dispatch = useDispatch();
@@ -14,10 +16,9 @@ export default function Searchbar(){
         );
     }
     return(
-        <div>
-            <h2>Searchbar</h2>
+        <div className={style.search}>
             <input type="search" onChange={e => inputSerching(e.target.value)} value={searching}/>
-            <button onClick={search}>Search</button>
+            <button onClick={search}><img src={magnifyingGlass} className={style.image}/></button>
         </div>
     );
 }

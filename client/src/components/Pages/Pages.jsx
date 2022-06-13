@@ -1,6 +1,7 @@
 import React from "react";
 import { useDispatch,useSelector } from  'react-redux';
 import { setNumberPage } from "../../actions/index.js";
+import style from './Pages.module.css';
 
 export default function Pages(){
     const dispatch = useDispatch();
@@ -18,11 +19,10 @@ export default function Pages(){
         }
     }
     return(
-        <div>
-            <h2>Pagination</h2>
+        <div className={style.container}>
             {pageMax && 
                 paginado.map(pag =>{
-                    return <button key={pag} value={pag} onClick={e => pagination(e.target.value)}>{pag}</button>
+                    return <div><button key={pag} value={pag} onClick={e => pagination(e.target.value)} className={pag==pageActuality && style.active}>{pag}</button></div>
                 })
             }
         </div>

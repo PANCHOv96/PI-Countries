@@ -1,0 +1,13 @@
+.btnActivity{
+    text-align: right;
+}
+.btnActivity button{
+    border: none;
+    border-radius: 50px;
+    height: 40px;
+    background-color: rgb(255, 211, 105);
+    color: rgb(57, 62, 70);
+}
+.btnActivity button:hover{
+    cursor: pointer;
+}

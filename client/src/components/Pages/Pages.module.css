@@ -1,0 +1,25 @@
+.container{
+    margin: 10px 0 0 0;
+    display: flex;
+    justify-content: center;
+}
+.container>div{
+    margin: 2px;
+}
+.container button{
+    padding: 0;
+    border: none;
+    width: 30px;
+    height: 30px;
+    border-radius: 100%;
+    background-color: #eeeeee;
+    font-size: 15px;
+}
+.container button:hover{
+    cursor: pointer;
+    transition: all 400ms;
+    background-color: rgb(255, 211, 105);
+}
+button.active{
+    background-color: rgb(255, 211, 105);
+}

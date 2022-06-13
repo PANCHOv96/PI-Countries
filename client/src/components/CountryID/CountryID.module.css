@@ -1,0 +1,61 @@
+.container{
+    width: 1200px;
+    margin: 0 auto;
+}
+.title ,.titleActivity{
+    font-size: 60px;
+    margin: 30px 0 20px 0;
+    text-transform: uppercase;
+    font-weight: 200;
+}
+.titleActivity{
+    font-size: 30px;
+    font-weight: 400;
+}
+.containerCountryData{
+    display: flex;
+    justify-content: center;
+}
+.image{
+    width: 70%;
+}
+.image img{
+    width: 100%;
+    padding: 0 10px;
+}
+.data{
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-left: 1px solid rgb(34, 40, 49);
+}
+.data p{
+    font-size: 16px;
+    font-weight: 400;
+    text-transform: uppercase;
+}
+.data p span{
+    font-size: 20px;
+    font-weight: 300;
+    text-transform: uppercase;
+}
+.activity{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgb(34, 40, 49);
+}
+.activity div{
+    width: 30%;
+    text-align: center;
+}
+.activity img{
+    margin-top: 9px;
+    width: 20%;
+}
+.activity p{
+    font-size: 20px;
+    font-weight: 400;
+}
