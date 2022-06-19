@@ -6,6 +6,7 @@ import style from './CountryID.module.css';
 import imageDifficulty from './img/difficulty.png';
 import imageDuration from './img/duration.png';
 import imageSeason from './img/season.png';
+import BtnActivity from '../Activity/BtnActivity.jsx';
 
 export default function CountryID(){
     const { idPais } = useParams();
@@ -55,6 +56,7 @@ export default function CountryID(){
             </div>
             <h3 className={style.titleActivity}>Activities</h3>
             {countryID.Activities ? getActivity() : <p>Not Activity</p>}
+            <BtnActivity/>
         </div>
     );
 }

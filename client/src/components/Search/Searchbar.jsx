@@ -18,7 +18,7 @@ export default function Searchbar(){
     return(
         <div className={style.search}>
             <input type="search" onChange={e => inputSerching(e.target.value)} value={searching}/>
-            <button onClick={search}><img src={magnifyingGlass} className={style.image}/></button>
+            <button onClick={search}><img src={magnifyingGlass} alt={magnifyingGlass} className={style.image}/></button>
         </div>
     );
 }

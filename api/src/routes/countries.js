@@ -2,6 +2,7 @@ const { Router } = require('express');
 const { Country } = require('../db');
 const axios = require('axios');
 const getConditions = require('./Conditions/Conditions.js');
+const { signedCookie } = require('cookie-parser');
 const router = Router();
 
 router.get('/', (req,res ,next) =>{
@@ -12,7 +13,7 @@ router.get('/', (req,res ,next) =>{
     if(name){
         countries.then(response =>{
             if(!response.rows[0]){
-                res.status(404).json({message:`There is no country named: ${name}`});
+                res.status(404).json({message:`There is no country name: ${name}`});
             }else{
                 res.json(response);
             }
@@ -62,6 +63,19 @@ router.get('/:idPais', (req,res ,next) =>{
             }
         }).catch(e => { next (e)});
     }
+});
+
+router.post('/prueba', (req,res,next) =>{
+
+    Country.create(req.body)
+    .then(resp => {
+        res.send(resp)
+        console.log('Res',resp.dataValues)
+    })
+    .catch(err => {
+        console.log(err.message)
+        res.send(err)
+    });
 });
 
 module.exports = router;

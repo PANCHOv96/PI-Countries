@@ -100,12 +100,12 @@ export default function Activity(){
                 <fieldset>
                     <legend>New Actvity</legend>
                     <div> 
-                            <label htmlFor={NAME}>Name <span>{(errors.name != 'Error' && errors.name) && errors.name}</span></label>
-                        <input key={NAME} type="text" name={NAME} id={NAME}  value={newActivity.name} onChange={e=>handleOnChange(e.target)} className={(errors.name != 'Error' && errors.name) && style.alert}/>
+                            <label htmlFor={NAME}>Name <span>{(errors.name !== 'Error' && errors.name) && errors.name}</span></label>
+                        <input key={NAME} type="text" name={NAME} id={NAME}  value={newActivity.name} onChange={e=>handleOnChange(e.target)} className={(errors.name !== 'Error' && errors.name) && style.alert}/>
                     </div>
                     <div>
-                        <label htmlFor={DIFFICULTY}>Difficulty <span>{(errors.difficulty != 'Error' && errors.difficulty) && errors.difficulty}</span></label>
-                        <select key={DIFFICULTY} id={DIFFICULTY} name={DIFFICULTY} value={newActivity.difficulty} onChange={e=>handleOnChange(e.target)} className={(errors.difficulty != 'Error' && errors.difficulty) && style.alert}>
+                        <label htmlFor={DIFFICULTY}>Difficulty <span>{(errors.difficulty !== 'Error' && errors.difficulty) && errors.difficulty}</span></label>
+                        <select key={DIFFICULTY} id={DIFFICULTY} name={DIFFICULTY} value={newActivity.difficulty} onChange={e=>handleOnChange(e.target)} className={(errors.difficulty !== 'Error' && errors.difficulty) && style.alert}>
                             <option value='' disabled selected>Difficulty</option>
                             <option value='1'>1</option>
                             <option value='2'>2</option>
@@ -115,12 +115,12 @@ export default function Activity(){
                         </select>
                     </div>
                     <div> 
-                        <label htmlFor={DURATION}>Duration (Minutes)<span>{(errors.duration != 'Error' && errors.duration) && errors.duration}</span></label>
-                        <input key={DURATION} type="number" id={DURATION} name={DURATION} value={newActivity.duration} onChange={e=>handleOnChange(e.target)} className={(errors.duration != 'Error' && errors.duration) && style.alert}/>
+                        <label htmlFor={DURATION}>Duration (Minutes)<span>{(errors.duration !== 'Error' && errors.duration) && errors.duration}</span></label>
+                        <input key={DURATION} type="number" id={DURATION} name={DURATION} value={newActivity.duration} onChange={e=>handleOnChange(e.target)} className={(errors.duration !== 'Error' && errors.duration) && style.alert}/>
                     </div>
                     <div>
-                        <label htmlFor={SEASON}>Season <span>{(errors.season != 'Error' && errors.season) && errors.season}</span></label>
-                        <select key={SEASON} id={SEASON} name={SEASON} value={newActivity.season} onChange={e=>handleOnChange(e.target)} className={(errors.season != 'Error' && errors.season) && style.alert}>
+                        <label htmlFor={SEASON}>Season <span>{(errors.season !== 'Error' && errors.season) && errors.season}</span></label>
+                        <select key={SEASON} id={SEASON} name={SEASON} value={newActivity.season} onChange={e=>handleOnChange(e.target)} className={(errors.season !== 'Error' && errors.season) && style.alert}>
                             <option value='' disabled selected>Season</option>
                             <option value={SUMMER}>Summer</option>
                             <option value={AUTUMN}>Autumn</option>
@@ -129,8 +129,8 @@ export default function Activity(){
                         </select>
                     </div>
                     <div>
-                        <label htmlFor={IDPAIS}>IdPais <span>{(errors.idPais != 'Error' && errors.idPais) && errors.idPais}</span></label>
-                        <select key={IDPAIS} id={IDPAIS} name={IDPAIS} onChange={e=>handleOnChange(e.target)} value={newActivity.idPais.length > 0 ? newActivity.idPais[newActivity.idPais.length-1] : ''} className={(errors.idPais != 'Error' && errors.idPais) && style.alert}>
+                        <label htmlFor={IDPAIS}>IdPais <span>{(errors.idPais !== 'Error' && errors.idPais) && errors.idPais}</span></label>
+                        <select key={IDPAIS} id={IDPAIS} name={IDPAIS} onChange={e=>handleOnChange(e.target)} value={newActivity.idPais.length > 0 ? newActivity.idPais[newActivity.idPais.length-1] : ''} className={(errors.idPais !== 'Error' && errors.idPais) && style.alert}>
                             <option value='' disabled selected>IdPais</option>
                             {countries.length > 0 && countries.map(country =>{
                                 return <option value={country.id} key={country.id}>{country.name}</option>

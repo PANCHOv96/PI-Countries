@@ -36,7 +36,7 @@ module.exports = (sequelize) => {
     },
     // Area
     area:{
-      type: DataTypes.STRING,
+      type: DataTypes.INTEGER,
     },
     // Poblacion
     population:{

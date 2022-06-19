@@ -5,11 +5,9 @@ import style from './BtnActivity.module.css';
 export default function BtnActivity(){
     return(
         <div>
-            <div className={style.btnActivity}>
-                <Link to={`/activity`}>
-                    <button>Create Activity</button>
-                </Link>
-            </div>
+            <Link to={`/activity`}>
+                <button className={style.btn}>Create Activity</button>
+            </Link>
         </div>
     );
 }
