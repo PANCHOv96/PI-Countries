@@ -7,7 +7,7 @@ export default function BtnActivity(){
         <div>
             <Link to={`/activity`}>
                 <button className={style.btn}>Create Activity</button>
-            </Link>
+            </Link> 
         </div>
     );
 }

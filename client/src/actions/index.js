@@ -14,6 +14,7 @@ export const CREATE_ACTIVITY = 'CREATE_ACTIVITY';
 export const SET_LOADING = 'SET_LOADING';
 export const ALERT = 'ALERT';
 export const SET_ALERT = 'SET_ALERT';
+export const SET_FILTERS = 'SET_FILTERS';
 const axios = require('axios');
 
 export function getCountryAll(conditions){
@@ -134,6 +135,13 @@ export function setAlert(msjAlert=''){
     return {
         type: SET_ALERT,
         msjAlert
+    }
+}
+
+export function setFilters(value){
+    return {
+        type: SET_FILTERS,
+        value
     }
 }
 

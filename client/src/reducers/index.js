@@ -1,4 +1,4 @@
-import {GET_COUNTRY ,GET_COUNTRY_ID,GET_ACTIVITY, SET_NUMBER_PAGE ,SET_NAME ,SET_CONTINENT,SET_POPULATION,SET_ALPHABETICALLY,SET_RESET,SET_ACTIVITY,SET_LOADING, ALERT,SET_ALERT} from '../actions/index.js'
+import {GET_COUNTRY ,GET_COUNTRY_ID,GET_ACTIVITY, SET_NUMBER_PAGE ,SET_NAME ,SET_CONTINENT,SET_POPULATION,SET_ALPHABETICALLY,SET_RESET,SET_ACTIVITY,SET_LOADING, ALERT,SET_ALERT,SET_FILTERS} from '../actions/index.js'
 
 const initialState={
     country:[],
@@ -9,7 +9,8 @@ const initialState={
     loading: false,
     conditions:{
     },
-    alert:''
+    alert:'',
+    filters: false
 }
 
 export default function rootReducer(state=initialState,action){
@@ -64,7 +65,7 @@ export default function rootReducer(state=initialState,action){
                     continents: action.continents,
                     pagination: 1
                 },
-                alert:''
+                alert:'',
             }
         case SET_POPULATION: 
             return{
@@ -112,7 +113,7 @@ export default function rootReducer(state=initialState,action){
             return{
                 ...state,
                 loading: true,
-                alert:''
+                alert:'',
             }
         case ALERT: 
             return{
@@ -125,6 +126,11 @@ export default function rootReducer(state=initialState,action){
                 ...state,
                 loading:false,
                 alert: {message:action.msjAlert}
+            }
+        case SET_FILTERS: 
+            return{
+                ...state,
+                filters: action.value
             }
         default:
             return {...state}

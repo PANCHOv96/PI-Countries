@@ -7,18 +7,15 @@ import magnifyingGlass from './img/magnifying-glass.svg';
 export default function Searchbar(){
     const dispatch = useDispatch();
     let [searching,setSearching] = useState('');
-    function search(){
-        dispatch(setName(searching))
-    }
-    function inputSerching(search){
-        setSearching(
-            search
-        );
+    function search(search){
+        setSearching(search)
+        if(search.length > 2 || search.length === 0){
+            dispatch(setName(search))
+        }
     }
     return(
         <div className={style.search}>
-            <input type="search" onChange={e => inputSerching(e.target.value)} value={searching}/>
-            <button onClick={search}><img src={magnifyingGlass} alt={magnifyingGlass} className={style.image}/></button>
+            <input type="search" onChange={e => search(e.target.value)} value={searching} placeholder='Search..'/>
         </div>
     );
 }

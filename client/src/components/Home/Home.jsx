@@ -8,8 +8,8 @@ export default function Home(){
     return(
         <div>
             <Filters />
-            <Countries />
             <Pages />
+            <Countries />
         </div>
     );
 }

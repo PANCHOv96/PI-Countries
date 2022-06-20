@@ -3,23 +3,11 @@
     height: 40px;
 }
 .search input{
-    width:90%;
-    padding: 10px 10px;
-    height: 100%;
+    width: 100%;
+    background-color: #e1e1e1;
+    padding: 1em;
+    margin-bottom: 20px;
     border: none;
-    border-radius: 20px 0 0 20px;
+    border-radius: 0.5rem;
 }
-.search button{
-    width: 10%;
-    height: 100%;
-    background-color: #EEEEEE;
-    border: none;
-    border-radius: 0 20px 20px 0;
-    color: rgb(57, 62, 70);
-}
-.search button:hover{
-    cursor: pointer;
-}
-.image{
-    max-height: 35%;
-}
+

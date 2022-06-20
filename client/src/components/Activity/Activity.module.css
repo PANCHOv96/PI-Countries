@@ -16,7 +16,7 @@ fieldset input,fieldset select{
     display: block;
     width: 100%;
     background-color: #e1e1e1;
-    padding: 1rem;
+    padding: 1em;
     margin-bottom: 20px;
     border: none;
     border-radius: 0.5rem;
@@ -30,17 +30,22 @@ fieldset label span{
 }
 .createActivity{
     border: none;
-    border-radius: 50px;
+    padding: 1em;
+    border-radius: 0.5rem;
     height: 40px;
     background-color: rgb(255, 211, 105);
     color: rgb(57, 62, 70);
-    transition: all 2s;
-}
-.createActivity:disabled{
-    background-color: rgb(255, 211, 105,.3);
+    border-color: rgb(255, 211, 105);
+    border: 1px solid;
+    transition: all 1500ms;
 }
 .createActivity:hover{
     cursor: pointer;
+}
+.createActivity:disabled{
+    background-color: rgb(57, 62, 70);
+    color: gray;
+    cursor: inherit;
 }
 .right{
     text-align: right;

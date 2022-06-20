@@ -11,12 +11,12 @@ import MsjAlert from './components/MsjAlert/MsjAlert.jsx';
 function App() {
   return (
     <div className="App">
-      <Header/>
+      <Header/> 
       <Routes>
-        <Route exact path='/' element={<Main />}/>
-        <Route exact path='/home' element={<Home />}  />
+        <Route exact path='/' element={<Main />}/> 
+        <Route path='/home' element={<Home/>}  />
         <Route exact path='/home/:idPais' element={<CountryID />}  />
-        <Route exact path='/activity' element={<Activity />}  />
+        <Route exact path='/activity' element={<Activity />}  /> 
       </Routes>
       <MsjAlert/>
     </div>
