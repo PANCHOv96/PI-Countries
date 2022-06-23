@@ -15,7 +15,7 @@ export default function Searchbar(){
     }
     return(
         <div className={style.search}>
-            <input type="search" onChange={e => search(e.target.value)} value={searching} placeholder='Search..'/>
+            <input type="search" onChange={e => search(e.target.value)} value={searching} placeholder='Search...'/>
         </div>
     );
 }

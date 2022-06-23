@@ -9,7 +9,7 @@ export default function Main(){
                 <p className={style.description}>Welcome to my first react project....</p>
                 <div>
                     <Link to={`/home`}>
-                        <button className={style.start}>Start</button>
+                        <button className={style.start}>START</button>
                     </Link>
                 </div>
             </div>

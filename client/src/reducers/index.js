@@ -9,7 +9,8 @@ const initialState={
     loading: false,
     conditions:{
     },
-    alert:'',
+    alert:{
+    },
     filters: false
 }
 

@@ -1,6 +1,6 @@
 .description{
     font-size: 100px;
-    color: rgba(255, 211, 105,.5);
+    color: rgba(255, 211, 105,.7);
 }
 .start{
     font-size: 47px;
@@ -8,14 +8,13 @@
     background-color: rgba(255, 211, 105,1);
     color: #222831;
     border: none;
-    border-radius: 100px;
+    border-radius: 0.5rem;
 }
 .start:hover{
     cursor: pointer; 
     transition: all 500ms;
     background-color: #393E46;
     color: rgba(255, 211, 105,1);
-    box-shadow: 0px 2px 2px 0px rgba(255, 211, 105,1);
 }
 .background{
     height: 100%;

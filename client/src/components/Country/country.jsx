@@ -5,16 +5,13 @@ import style from './country.module.css';
 export default function Country({country}){
     return(
         <div className={style.container}>
-            <h3 className={style.title}>{country.name}</h3>
-            <div>
-                <img src={country.image} alt={country.image} className={style.image}/>
-                <p>{country.continent}</p>
+            <img src={country.image} alt={country.image} className={style.image}/>
+            <Link to={`/home/${country.id}`} className={style.info}>
                 <div>
-                    <Link to={`/home/${country.id}`}>
-                        <button className={style.btn}>Info</button>
-                    </Link>
+                    <h3 className={style.title}>{country.name}</h3>
+                    <p>{country.continent}</p>
                 </div>
-            </div>
+            </Link>
         </div>
     );
 }
