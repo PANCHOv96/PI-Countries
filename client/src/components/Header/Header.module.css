@@ -13,14 +13,27 @@
     display: flex;
     justify-content: space-evenly;
     align-items: center;
+    flex-wrap: wrap;
 }
 .header>div{
     width: 30%;
+}
+@media only screen and (max-width: 600px) {
+    .header>div{
+        width: 100%;
+        text-align: center;
+        margin: 0 10px 10px 10px;
+    }
 }
 .btnRight {
     display: flex;
     justify-content: flex-end;
     text-align: right;
+}
+@media only screen and (max-width: 600px) {
+    .btnRight{
+        justify-content: space-between;
+    }
 }
 .textLeft{
     text-align: left;

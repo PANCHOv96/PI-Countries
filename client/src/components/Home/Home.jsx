@@ -9,7 +9,7 @@ export default function Home(){
         <div>
             <Filters />
             <Pages />
-            <Countries />
+            <Countries /> 
         </div>
     );
 }

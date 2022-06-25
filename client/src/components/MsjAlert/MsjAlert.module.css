@@ -19,10 +19,15 @@
     justify-content: center;
 }
 .title{
-    font-size: 80px;
+    font-size: 5em;
     font-weight: 100;
     text-transform: capitalize;
     color: rgb(255, 211, 105);
+}
+@media only screen and (max-width: 600px) {
+    .title{
+        font-size: 3em;
+    }
 }
 .close{
     border: none;

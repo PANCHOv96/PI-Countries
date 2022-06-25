@@ -4,6 +4,11 @@ fieldset{
     border-radius: 4px;
     text-align: left;
 }
+@media only screen and (max-width: 600px) {
+    fieldset{
+        width: 95%;
+    }
+}
 fieldset legend{
     font-size: 24px;
 }

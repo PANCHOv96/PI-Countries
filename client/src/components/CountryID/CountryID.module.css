@@ -3,19 +3,34 @@
     margin: 0 auto;
     margin-bottom: 1em;
 }
+@media only screen and (max-width: 600px) {
+    .container{
+        width:90%;
+    }
+}
 .title ,.titleActivity{
-    font-size: 60px;
+    font-size: 4em;
     margin: 30px 0 20px 0;
     text-transform: uppercase;
     font-weight: 200;
 }
 .titleActivity{
-    font-size: 30px;
+    font-size: 3em;
     font-weight: 400;
+}
+@media only screen and (max-width: 600px) {
+    .title,.titleActivity{
+        font-size: 2em;
+    }
 }
 .containerCountryData{
     display: flex;
     justify-content: center;
+}
+@media only screen and (max-width: 600px) {
+    .containerCountryData{
+        display: block;
+    }
 }
 .image{
     width: 70%;
@@ -24,6 +39,15 @@
     width: 100%;
     padding: 0 10px;
 }
+@media only screen and (max-width: 600px) {
+    .image{
+        width: 100%;
+    }
+    .image img{
+        width: 100%;
+        padding:0;
+    }
+}
 .data{
     width: 30%;
     display: flex;
@@ -31,6 +55,15 @@
     align-items: center;
     justify-content: center;
     border-left: 1px solid rgb(34, 40, 49);
+}
+@media only screen and (max-width: 600px) {
+    .data{
+        width: 100%;
+        border-left: none;
+        border-bottom: 1px solid rgb(34, 40, 49);
+        border-top: 1px solid rgb(34, 40, 49);
+        margin-top: 1em;
+    }
 }
 .data p{
     font-size: 16px;
@@ -47,6 +80,11 @@
     align-items: center;
     justify-content: center;
     color: rgb(34, 40, 49);
+}
+@media only screen and (max-width: 600px) {
+    fieldset{
+        margin: 1em 0;
+    }
 }
 .activity div{
     width: 30%;

@@ -17,9 +17,12 @@
     margin-bottom: 1em;
 }
 .containerCountries>div{
-    /* width: 20%;
-    height: 50%; */
     width: 45%;
+}
+@media only screen and (max-width: 600px) {
+    .containerCountries>div{
+        width: 90%;
+    }
 }
 .flip-card-back {
     background-color: dodgerblue;

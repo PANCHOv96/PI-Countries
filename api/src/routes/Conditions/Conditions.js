@@ -21,7 +21,7 @@ module.exports = function getConditions(data,objectConditions){
         arrayWhere.push({name: {[Op.iLike]: `%${name}%`}});
     }
     if(continents){
-        arrayWhere.push({continent: continents});
+        arrayWhere.push({continent: {[Op.iLike]: `${continents}`}});
     }
     objectConditions.where = {
         [Op.and]: arrayWhere
@@ -29,7 +29,7 @@ module.exports = function getConditions(data,objectConditions){
     if(activities){
         objectConditions.include = {
             model: Activity,
-            where: { name: activities }
+            where: { name: {[Op.iLike]: `${activities}`} }
         };
     }
     if(alphabetically){
