@@ -10,7 +10,7 @@ router.post('/', (req,res ,next) => {
     const conditions = {};
     conditions.where = {
         [Op.and]: [
-            { name },
+            { name: {[Op.iLike]: `${name}`}},
             { difficulty }
         ]
     }
@@ -39,8 +39,8 @@ router.post('/', (req,res ,next) => {
 
 router.get('/', (req,res,next)=>{
     Activity.findAll({
-        attributes: ["name"],
-        group: "name",
+        attributes: ["name","id"],
+        group: ["name","id"],
     })
     .then(response =>{
         res.json(response);

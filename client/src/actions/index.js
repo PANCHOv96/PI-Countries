@@ -118,7 +118,7 @@ export function createActivity(data){
                     type: CREATE_ACTIVITY,
                 })
             )
-            .catch(e => dispatch({                  
+            .catch(e => dispatch({                 
                 type: ALERT,
                 msjAlert: e.response.data
             }))

@@ -38,7 +38,7 @@ export default function Filters(){
         return (<div>
                     <label htmlFor="activities">Activities</label>
                     <select id="activities" name="activities" onChange={e => ActivitySelected(e.target.value)}  value={conditions.activities ? conditions.activities : ''}>
-                        <option value='' disabled selected>Filter by Activities</option>
+                        <option value='' disabled key='none'>Filter by Activities</option>
                         {activity.map(act=>{
                             return <option value={act.name} key={act.id}>{act.name}</option>
                         })}
@@ -55,7 +55,7 @@ export default function Filters(){
                     <div>
                         <label htmlFor="continents">Continents</label>
                         <select id="continents" name="continents" onChange={e => ContinentSelected(e.target.value)} value={conditions.continents ? conditions.continents : ''}>
-                            <option value='' disabled selected>Filter by Continent</option>
+                            <option value='' disabled>Filter by Continent</option>
                             <option value='Americas'>Americas</option>
                             <option value='Europe'>Europe</option>
                             <option value='Africa'>Africa</option>
@@ -68,11 +68,11 @@ export default function Filters(){
                     <div>
                         <label htmlFor="orders">Orders</label>
                         <select id="orders" name="orders" onChange={e => ordersSelected(e.target.value)} value={conditions.alphabetically ? `ALFA-${conditions.alphabetically}` : conditions.population ? `POP-${conditions.population}`:''}>
-                            <option value='' disabled selected>Filter by Orders</option>
-                            <option value='ALFA-ASC'>ALFA ASC</option>
-                            <option value='ALFA-DESC'>ALFA DESC</option>
-                            <option value='POP-ASC'>POP ASC</option>
-                            <option value='POP-DESC'>POP DESC</option>
+                            <option value='' disabled>Filter by Orders</option>
+                            <option value='ALFA-ASC'>ALPHABETICALLY ASC</option>
+                            <option value='ALFA-DESC'>ALPHABETICALLY DESC</option>
+                            <option value='POP-ASC'>POPULATION ASC</option>
+                            <option value='POP-DESC'>POPULATION DESC</option>
                         </select>
                     </div>
                     <div>

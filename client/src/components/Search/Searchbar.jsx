@@ -2,7 +2,6 @@ import React , {useState} from "react";
 import { useDispatch} from  'react-redux';
 import { setName } from "../../actions/index.js";
 import style from './Searchbar.module.css';
-import magnifyingGlass from './img/magnifying-glass.svg';
 
 export default function Searchbar(){
     const dispatch = useDispatch();

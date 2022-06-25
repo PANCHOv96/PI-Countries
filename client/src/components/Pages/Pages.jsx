@@ -23,11 +23,13 @@ export default function Pages(){
     }
     return(
         <div className={style.container}>
-            {pageMax && 
-                paginado.map(pag =>{
-                    return <div><button key={pag} value={pag} onClick={e => pagination(e.target.value)} className={pag===pageActuality && style.active}>{pag}</button></div>
-                })
-            }
+            <ul>
+                {pageMax && 
+                    paginado.map(pag =>{
+                        return <li key={pag}><button  value={pag} onClick={e => pagination(e.target.value)} className={pag===pageActuality ? style.active : ''}>{pag}</button></li>
+                    })
+                }
+            </ul>
         </div>
     );
 }

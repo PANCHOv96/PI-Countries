@@ -1,6 +1,6 @@
 import React ,{ useEffect ,useState} from "react";
 import { useDispatch ,useSelector} from  'react-redux';
-import { createActivity, getCountryAll ,setAlert} from "../../actions/index.js";
+import { createActivity, getActivity, getCountryAll ,setAlert} from "../../actions/index.js";
 import style from './Activity.module.css'
 
 const NAME = 'name';
@@ -21,6 +21,7 @@ export default function Activity(){
     const [errors,setErrors] = useState(createObject('Error'));
     useEffect(()=>{
         dispatch(getCountryAll({country:true}));
+        dispatch(getActivity());
     },[dispatch]);
     function createObject(value=''){
        return{
@@ -87,11 +88,12 @@ export default function Activity(){
     function submitFormActivity(e){
         e.preventDefault();
         dispatch(createActivity(newActivity)).then(data=>{
-            if(!data.msjError){
+            if(!data.msjAlert){
                 dispatch(setAlert('New Activity Create'));
                 setNewActivity(createObject());
                 setErrors(createObject('Error'))
             }
+            dispatch(getActivity());
         });
     }
     return(
@@ -100,13 +102,13 @@ export default function Activity(){
                 <fieldset>
                     <legend>New Actvity</legend>
                     <div> 
-                            <label htmlFor={NAME}>Name* <span>{(errors.name !== 'Error' && errors.name) && errors.name}</span></label>
-                        <input key={NAME} type="text" name={NAME} id={NAME}  value={newActivity.name} onChange={e=>handleOnChange(e.target)} className={(errors.name !== 'Error' && errors.name) && style.alert}/>
+                        <label htmlFor={NAME}>Name* <span>{(errors.name !== 'Error' && errors.name) ? errors.name : ''}</span></label>
+                        <input key={NAME} type="text" name={NAME} id={NAME}  value={newActivity.name} onChange={e=>handleOnChange(e.target)} className={(errors.name !== 'Error' && errors.name) ? style.alert : ''}/>
                     </div>
                     <div>
-                        <label htmlFor={DIFFICULTY}>Difficulty* <span>{(errors.difficulty !== 'Error' && errors.difficulty) && errors.difficulty}</span></label>
-                        <select key={DIFFICULTY} id={DIFFICULTY} name={DIFFICULTY} value={newActivity.difficulty} onChange={e=>handleOnChange(e.target)} className={(errors.difficulty !== 'Error' && errors.difficulty) && style.alert}>
-                            <option value='' disabled selected>Difficulty</option>
+                        <label htmlFor={DIFFICULTY}>Difficulty* <span>{(errors.difficulty !== 'Error' && errors.difficulty) ? errors.difficulty : ''}</span></label>
+                        <select key={DIFFICULTY} id={DIFFICULTY} name={DIFFICULTY} value={newActivity.difficulty} onChange={e=>handleOnChange(e.target)} className={(errors.difficulty !== 'Error' && errors.difficulty) ? style.alert : ''}>
+                            <option value='' disabled>Difficulty</option>
                             <option value='1'>1</option>
                             <option value='2'>2</option>
                             <option value='3'>3</option>
@@ -116,12 +118,12 @@ export default function Activity(){
                     </div>
                     <div> 
                         <label htmlFor={DURATION}>Duration* <span>{(errors.duration !== 'Error' && errors.duration) && errors.duration}</span></label>
-                        <input key={DURATION} type="number" id={DURATION} name={DURATION} value={newActivity.duration} onChange={e=>handleOnChange(e.target)} className={(errors.duration !== 'Error' && errors.duration) && style.alert} placeholder='In minutes'/>
+                        <input key={DURATION} type="number" id={DURATION} name={DURATION} value={newActivity.duration} onChange={e=>handleOnChange(e.target)} className={(errors.duration !== 'Error' && errors.duration) ? style.alert : ''} placeholder='In minutes'/>
                     </div>
                     <div>
                         <label htmlFor={SEASON}>Season* <span>{(errors.season !== 'Error' && errors.season) && errors.season}</span></label>
-                        <select key={SEASON} id={SEASON} name={SEASON} value={newActivity.season} onChange={e=>handleOnChange(e.target)} className={(errors.season !== 'Error' && errors.season) && style.alert}>
-                            <option value='' disabled selected>Season</option>
+                        <select key={SEASON} id={SEASON} name={SEASON} value={newActivity.season} onChange={e=>handleOnChange(e.target)} className={(errors.season !== 'Error' && errors.season) ? style.alert : ''}>
+                            <option value='' disabled>Season</option>
                             <option value={SUMMER}>Summer</option>
                             <option value={AUTUMN}>Autumn</option>
                             <option value={WINTER}>Winter</option>
@@ -130,8 +132,8 @@ export default function Activity(){
                     </div>
                     <div>
                         <label htmlFor={IDPAIS}>IdPais* <span>{(errors.idPais !== 'Error' && errors.idPais) && errors.idPais}</span></label>
-                        <select key={IDPAIS} id={IDPAIS} name={IDPAIS} onChange={e=>handleOnChange(e.target)} value={newActivity.idPais.length > 0 ? newActivity.idPais[newActivity.idPais.length-1] : ''} className={(errors.idPais !== 'Error' && errors.idPais) && style.alert}>
-                            <option value='' disabled selected>IdPais</option>
+                        <select key={IDPAIS} id={IDPAIS} name={IDPAIS} onChange={e=>handleOnChange(e.target)} value={newActivity.idPais.length > 0 ? newActivity.idPais[newActivity.idPais.length-1] : ''} className={(errors.idPais !== 'Error' && errors.idPais) ? style.alert : ''}>
+                            <option value='' disabled>IdPais</option>
                             {countries.length > 0 && countries.map(country =>{
                                 return <option value={country.id} key={country.id}>{country.name}</option>
                             })}

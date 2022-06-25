@@ -10,7 +10,6 @@ const initialState={
     conditions:{
     },
     alert:{
-        message:"Faltan Datos Importantes en la base de datos"
     },
     filters: false
 }

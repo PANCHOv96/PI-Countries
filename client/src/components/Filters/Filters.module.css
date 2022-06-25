@@ -3,7 +3,7 @@
     to {  width: 15em;}
 }
 .filters{
-    z-index: 10;
+    z-index: 1;
     width: 15em;
     height: 100%;
     position: fixed;
