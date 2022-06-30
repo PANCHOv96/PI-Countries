@@ -87,13 +87,15 @@ export default function Activity(){
     }
     function submitFormActivity(e){
         e.preventDefault();
-        dispatch(createActivity(newActivity)).then(data=>{
+        dispatch(createActivity(newActivity))
+        .then(data=>{
             if(!data.msjAlert){
-                dispatch(setAlert('New Activity Create'));
+                dispatch(getActivity()).then(()=>{
+                    dispatch(setAlert('New Activity Create'))
+                })
                 setNewActivity(createObject());
                 setErrors(createObject('Error'))
             }
-            dispatch(getActivity());
         });
     }
     return(
